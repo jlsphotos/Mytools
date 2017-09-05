@@ -13,8 +13,10 @@ soup = bs(sauce, 'html.parser')
 
 # Set CSV
 fn = 'Top_Movies.csv'
-header = 'Title,'
+header = 'Title, Cert, Rating, Votes, Runtime, Genre'
 f = open(fn, "w")
+
+f.write(header)
 
 containers = soup.find_all('div',{'class':'lister-item-content'})
 for contain in containers:
@@ -44,8 +46,9 @@ for contain in containers:
         genre = contain.find_all('span', {'class': 'genre'})[0].text
     except Exception:
         genre = 'NA'
+    f.write(title + ',' + cert + ',' + str(rating) + ',' + str(votes) + ',' + runtime + ',' + genre.replace(',','|'))
 
-    print(cert,title,rating,votes,runtime,genre.replace(',','|'))
+f.close()
 
 
 
