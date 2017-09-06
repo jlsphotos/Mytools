@@ -13,10 +13,11 @@ soup = bs(sauce, 'html.parser')
 
 # Set CSV
 fn = 'Top_Movies.csv'
-header = 'Title, Cert, Rating, Votes, Runtime, Genre'
+header = 'Title, Cert, Rating, Votes, Runtime, Genre\n'
 f = open(fn, "w")
 
 f.write(header)
+
 
 containers = soup.find_all('div',{'class':'lister-item-content'})
 for contain in containers:
@@ -32,6 +33,7 @@ for contain in containers:
     except Exception:
         rating = 0.0
 
+    rating = str(rating)
     try:
         votes = contain.find_all('span',{'name':'nv'})[0].text
     except Exception:
@@ -46,45 +48,8 @@ for contain in containers:
         genre = contain.find_all('span', {'class': 'genre'})[0].text
     except Exception:
         genre = 'NA'
-    f.write(title + ',' + cert + ',' + str(rating) + ',' + str(votes) + ',' + runtime + ',' + genre.replace(',','|'))
+
+    f.write(title + ',' + cert + ',' + str(rating).strip() + ',' +
+            str(votes).replace(',', '') + ',' + runtime + ',' + genre.replace(',', ' |').strip() + ',\n')
 
 f.close()
-
-
-
-
-
-
-# fn = 'top_movies.csv'
-# f = open(fn,"w")
-# header = 'Id, Title, Rating, Meta, Desc,Director, Votes, Gross\n'
-#
-# f.write(header)
-#
-#
-# #This will create a list of buyers:
-#
-# ids = [x.strip('.') for x in tree.xpath('//*[@id="main"]/div/div/div[3]/div/div[3]/h3/span[1]/text()')]
-# titles = tree.xpath('//*[@id="main"]/div/div/div/div/div/h3/a/text()')
-# ratings = tree.xpath('//*[@id="main"]/div/div/div/div/div[3]/div/div[1]/strong/text()')
-# metas = [x.strip(' ') for x in tree.xpath('//*[@id="main"]/div/div/div/div/div[3]/div/div[3]/span/text()')]
-# descs = tree.xpath('//*[@id="main"]/div/div/div/div/div[3]/p[2]/text()')
-# directors = tree.xpath('//*[@id="main"]/div/div/div/div/div[3]/p[3]/a[1]/text()')
-# votess = tree.xpath('//*[@id="main"]/div/div/div/div/div[3]/p[4]/span[2]/text()')
-# grosss = tree.xpath('//*[@id="main"]/div/div/div/div/div[3]/p[4]/span[5]/text()')
-#
-# for id, title, rating,meta,desc,director, votes,gross in ids,titles,ratings,metas,descs,directors,votess,grosss:
-#     f.write(id + ',' + title + ',' + rating + ',' + meta + ',' + desc.replace("," , "|") + ',' + director + ',' + votes + ',' + gross)
-#
-# f.close()
-#
-# # print(id)
-# # print(title)
-# # print(rating)
-# # print(meta)
-# # print(desc)
-# # print(director)
-# # print(votes)
-# # print(gross)
-#
-#
