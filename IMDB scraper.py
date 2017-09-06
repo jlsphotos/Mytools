@@ -3,7 +3,7 @@ from urllib.request import urlopen as ureq
 '''
 Scrapes IMDB Top movies, then copys to a file. This very rough around the edges but it works  
 '''
-for year in range(2015,2018):
+for year in range(2010,2018):
     # Set URL with year var.
     url = 'http://www.imdb.com/search/title?year=%s,%s&title_type=feature&sort=moviemeter,asc' % (year, year)
 
