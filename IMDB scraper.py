@@ -21,6 +21,7 @@ for year in range(2010,2018):
     f = open(fn, "w")
     f.write(header)
 
+    # loop though all Html objects and strip, convert and clean
     containers = soup.find_all('div', {'class': 'lister-item-content'})
     for contain in containers:
         title = contain.find_all('a')[0].text
