@@ -1,4 +1,7 @@
-
+#TODO: add rest of tax codes
+#TODO: add error checking
+#TODO: build front end
+#
 tax_rate = 0.2, 0.4, 0.45
 tax_allow = 11500
 tax_codes = {
